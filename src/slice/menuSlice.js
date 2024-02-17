@@ -13,11 +13,14 @@ const menuSlice = createSlice({
     menuItemClick(state, action) {
       state.activeMenuItem = action.payload;
     },
+    actionMenuItemClick(state, action) {
+      state.actionMenuItem = action.payload;
+    },
   },
 });
 
 const { actions, reducer } = menuSlice;
 
-export const { menuItemClick } = actions;
+export const { menuItemClick, actionMenuItemClick } = actions;
 
 export default reducer;

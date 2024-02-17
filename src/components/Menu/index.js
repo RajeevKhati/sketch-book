@@ -10,7 +10,7 @@ import {
 import styles from "./index.module.css";
 import { MENU_ITEMS } from "@/shared/constants";
 import { useDispatch, useSelector } from "react-redux";
-import { menuItemClick } from "@/slice/menuSlice";
+import { menuItemClick, actionMenuItemClick } from "@/slice/menuSlice";
 import cx from "classnames";
 
 export const Menu = () => {
@@ -19,6 +19,11 @@ export const Menu = () => {
   const handleMenuItemClick = (menuItem) => {
     dispatch(menuItemClick(menuItem));
   };
+
+  const handleActionMenuItemClick = (actionMenuItem) => {
+    dispatch(actionMenuItemClick(actionMenuItem));
+  };
+
   return (
     <div className={styles.menuContainer}>
       <button
@@ -42,7 +47,7 @@ export const Menu = () => {
       <button
         className={styles.iconWrapper}
         onClick={() => {
-          //
+          handleActionMenuItemClick(MENU_ITEMS.UNDO);
         }}
         tabIndex={0}
       >
@@ -51,7 +56,7 @@ export const Menu = () => {
       <button
         className={styles.iconWrapper}
         onClick={() => {
-          //
+          handleActionMenuItemClick(MENU_ITEMS.REDO);
         }}
         tabIndex={0}
       >
@@ -60,7 +65,7 @@ export const Menu = () => {
       <button
         className={styles.iconWrapper}
         onClick={() => {
-          //
+          handleActionMenuItemClick(MENU_ITEMS.DOWNLOAD);
         }}
         tabIndex={0}
       >
