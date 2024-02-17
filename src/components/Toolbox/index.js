@@ -1,10 +1,12 @@
 import React from "react";
 import styles from "./index.module.css";
-import { COLORS } from "@/shared/constants";
+import { COLORS, MENU_ITEMS } from "@/shared/constants";
 import { useSelector } from "react-redux";
 
 export const ToolBox = () => {
   const selectedMenuItem = useSelector((state) => state.menu.activeMenuItem);
+
+  const showColorOption = selectedMenuItem === MENU_ITEMS.PENCIL;
 
   const updateBrushSize = (e) => {
     //
@@ -12,35 +14,37 @@ export const ToolBox = () => {
 
   return (
     <div className={styles.toolboxContainer}>
-      <div className={styles.toolItem}>
-        <h4 className={styles.toolText}>Stroke color</h4>
-        <div className={styles.itemContainer}>
-          <div
-            className={styles.colorBox}
-            style={{ backgroundColor: COLORS.BLACK }}
-          />
-          <div
-            className={styles.colorBox}
-            style={{ backgroundColor: COLORS.RED }}
-          />
-          <div
-            className={styles.colorBox}
-            style={{ backgroundColor: COLORS.GREEN }}
-          />
-          <div
-            className={styles.colorBox}
-            style={{ backgroundColor: COLORS.BLUE }}
-          />
-          <div
-            className={styles.colorBox}
-            style={{ backgroundColor: COLORS.ORANGE }}
-          />
-          <div
-            className={styles.colorBox}
-            style={{ backgroundColor: COLORS.YELLOW }}
-          />
+      {showColorOption ? (
+        <div className={styles.toolItem}>
+          <h4 className={styles.toolText}>Stroke color</h4>
+          <div className={styles.itemContainer}>
+            <div
+              className={styles.colorBox}
+              style={{ backgroundColor: COLORS.BLACK }}
+            />
+            <div
+              className={styles.colorBox}
+              style={{ backgroundColor: COLORS.RED }}
+            />
+            <div
+              className={styles.colorBox}
+              style={{ backgroundColor: COLORS.GREEN }}
+            />
+            <div
+              className={styles.colorBox}
+              style={{ backgroundColor: COLORS.BLUE }}
+            />
+            <div
+              className={styles.colorBox}
+              style={{ backgroundColor: COLORS.ORANGE }}
+            />
+            <div
+              className={styles.colorBox}
+              style={{ backgroundColor: COLORS.YELLOW }}
+            />
+          </div>
         </div>
-      </div>
+      ) : null}
       <div className={styles.toolItem}>
         <h4 className={styles.toolText}>Brush size {selectedMenuItem}</h4>
         <div className={styles.itemContainer}>
