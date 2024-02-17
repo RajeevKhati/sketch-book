@@ -1,0 +1,35 @@
+const { MENU_ITEMS, COLORS } = require("@/shared/constants");
+const { createSlice } = require("@reduxjs/toolkit");
+
+const initialState = {
+  [MENU_ITEMS.PENCIL]: {
+    color: COLORS.BLACK,
+    size: 3,
+  },
+  [MENU_ITEMS.ERASER]: {
+    color: COLORS.WHITE,
+    size: 3,
+  },
+  [MENU_ITEMS.UNDO]: {},
+  [MENU_ITEMS.REDO]: {},
+  [MENU_ITEMS.DOWNLOAD]: {},
+};
+
+const toolboxSlice = createSlice({
+  name: "toolbox",
+  initialState,
+  reducers: {
+    changeColor(state, action) {
+      state[action.payload.menuItem].color = action.payload.color;
+    },
+    changeBrushSize(state, action) {
+      state[action.payload.menuItem].size = action.payload.size;
+    },
+  },
+});
+
+const { actions, reducer } = toolboxSlice;
+
+export const { changeColor, changeBrushSize } = actions;
+
+export default reducer;
