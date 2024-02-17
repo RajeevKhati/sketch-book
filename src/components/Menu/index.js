@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faPencil,
@@ -12,17 +12,29 @@ import { MENU_ITEMS } from "@/shared/constants";
 import { useDispatch, useSelector } from "react-redux";
 import { menuItemClick, actionMenuItemClick } from "@/slice/menuSlice";
 import cx from "classnames";
+import { socket } from "@/shared/socket";
 
 export const Menu = () => {
   const dispatch = useDispatch();
   const activeMenuItem = useSelector((state) => state.menu.activeMenuItem);
   const handleMenuItemClick = (menuItem) => {
     dispatch(menuItemClick(menuItem));
+    socket.emit("menuItemClick", { menuItem });
   };
 
   const handleActionMenuItemClick = (actionMenuItem) => {
     dispatch(actionMenuItemClick(actionMenuItem));
   };
+
+  useEffect(() => {
+    socket.on("menuItemClick", (args) => {
+      dispatch(menuItemClick(args.menuItem));
+    });
+
+    return () => {
+      socket.off("menuItemClick");
+    };
+  }, [dispatch]);
 
   return (
     <div className={styles.menuContainer}>
