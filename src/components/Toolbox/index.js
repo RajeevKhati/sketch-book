@@ -1,8 +1,11 @@
 import React from "react";
 import styles from "./index.module.css";
 import { COLORS } from "@/shared/constants";
+import { useSelector } from "react-redux";
 
 export const ToolBox = () => {
+  const selectedMenuItem = useSelector((state) => state.menu.activeMenuItem);
+
   const updateBrushSize = (e) => {
     //
   };
@@ -39,7 +42,7 @@ export const ToolBox = () => {
         </div>
       </div>
       <div className={styles.toolItem}>
-        <h4 className={styles.toolText}>Brush size</h4>
+        <h4 className={styles.toolText}>Brush size {selectedMenuItem}</h4>
         <div className={styles.itemContainer}>
           <input
             type="range"
